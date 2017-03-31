@@ -7,12 +7,16 @@
 # Configuration:
 #   None
 #
-# Commands:
-#   hubot standup -- It's time to stand-up!
-#
 # Author:
 #   PKoin
 
+HubotCron = require 'hubot-cronjob'
+
 module.exports = (robot) ->
-  robot.respond /standup/i, (res) ->
-    robot.emit 'kaamelott:command', res
+  # monday to friday, 9:30am
+  pattern = '30 9 * * 1-5'
+  timezone = 'Europe/Paris'
+  new HubotCron pattern, timezone, ->
+    room = 'blabla'
+    robot.messageRoom room, "Hey @here, c'est l'heure du stand-up :)"
+    robot.emit 'kaamelott:command', room

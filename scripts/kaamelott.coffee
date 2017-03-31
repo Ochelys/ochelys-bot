@@ -67,14 +67,16 @@ module.exports = (robot) ->
     ]
   }
 
-  robot.on 'kaamelott:command', (res) ->
-    res.send "Hey @here, c'est l'heure du stand-up :)"
-    res.send askAlexandreAstier(res)
+  robot.on 'kaamelott:command', (room) ->
+    robot.messageRoom room, askAlexandreAstier()
 
   robot.respond /kaamelott/i, (res) ->
-    res.send askAlexandreAstier(res)
+    res.send askAlexandreAstier()
 
-  askAlexandreAstier = (res) ->
-    character = res.random Object.keys(kaamelott)
-    quote = res.random kaamelott[character]
+  random = (items) ->
+    items[ Math.floor(Math.random() * items.length) ]
+
+  askAlexandreAstier = ->
+    character = random Object.keys(kaamelott)
+    quote = random kaamelott[character]
     "(Pendant ce temps là, à Kaamelott) #{character} : \"#{quote}\"."
