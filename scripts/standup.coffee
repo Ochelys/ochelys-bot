@@ -13,8 +13,8 @@
 HubotCron = require 'hubot-cronjob'
 
 module.exports = (robot) ->
-  # monday to friday, 9:30am
-  pattern = '30 9 * * 1-5'
+  # monday to friday, 9:20am
+  pattern = '20 9 * * 1-5'
   timezone = 'Europe/Paris'
   new HubotCron pattern, timezone, ->
     room = 'blabla'
